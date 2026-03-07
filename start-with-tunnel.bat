@@ -21,5 +21,5 @@ echo   Local:   localhost
 echo   Friends: 34.71.32.17
 echo =============================================
 echo.
-java -Xms4096M -Xmx4096M -jar server.jar --nogui
+java -Xms16384M -Xmx16384M -jar server.jar --nogui
 pause
