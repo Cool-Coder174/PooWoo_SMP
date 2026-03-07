@@ -35,3 +35,9 @@ paper.yml
 paper-global.yml
 paper-world-defaults.yml
 wepif.yml
+version_history.json
+
+# Rathole binaries
+rathole/*.exe
+rathole/*.zip
+rathole/__pycache__/
