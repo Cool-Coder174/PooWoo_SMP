@@ -1,12 +1,12 @@
 @echo off
 title PooWoo SMP - Full Stack
+set "JAVA_HOME=C:\Program Files\Amazon Corretto\jdk21.0.10_7"
+set "PATH=%JAVA_HOME%\bin;C:\Users\isaac\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin;%PATH%"
+
 echo =============================================
 echo   PooWoo SMP - Minecraft + GCP Tunnel
 echo =============================================
 echo.
-
-set "JAVA_HOME=C:\Program Files\Amazon Corretto\jdk21.0.10_7"
-set "PATH=%JAVA_HOME%\bin;%PATH%"
 
 echo [1/2] Opening SSH tunnel to GCP relay...
 echo       Friends connect to: 34.71.32.17

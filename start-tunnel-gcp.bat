@@ -1,5 +1,7 @@
 @echo off
 title PooWoo SMP - GCP Tunnel
+set "PATH=C:\Users\isaac\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin;%PATH%"
+
 echo ============================================
 echo   PooWoo SMP - SSH Reverse Tunnel to GCP
 echo ============================================
