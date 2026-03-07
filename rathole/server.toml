@@ -1,0 +1,9 @@
+# Rathole RELAY config -- runs on a machine with a public IP (VPS).
+# For local testing, run this on the same machine as the Minecraft server.
+
+[server]
+bind_addr = "0.0.0.0:2333"
+
+[server.services.minecraft]
+token = "PooWoo_SMP_2026_secret_token"
+bind_addr = "0.0.0.0:25566"

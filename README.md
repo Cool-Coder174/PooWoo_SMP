@@ -377,18 +377,29 @@ ipconfig
 ```
 Look for `IPv4 Address` (e.g., `192.168.1.100`). They connect to `192.168.1.100:25565`.
 
-### Over the Internet
+### Over the Internet (Rathole Tunnel)
 
-1. **Port forward** port `25565 TCP` on your router to your local IP.
-2. Find your **public IP** at https://whatismyip.com.
-3. Friends connect to `<your-public-ip>:25565`.
+Since this server runs behind apartment Wi-Fi with no router access, we use **Rathole** to tunnel traffic through a VPS.
+
+**How it works:**
+```
+Friends --> VPS (public IP, port 25565) --> Rathole tunnel --> Your PC (localhost:25565)
+```
+
+Setup instructions are in `rathole/README-TUNNEL.md`.
+
+**Quick local test** (no VPS needed):
+1. Start the server: `.\start.bat`
+2. Start the tunnel: `cd rathole && python tunnel.py --forward --listen 25566 --target 127.0.0.1:25565`
+3. Open Minecraft, connect to `localhost:25566` -- if it works, the tunnel concept is verified.
 
 ### Troubleshooting
 
 - **Firewall**: Windows should prompt to allow Java. If blocked, go to Windows Defender Firewall > Allow an app > add `java.exe`.
-- **Port forwarding not working**: Your ISP may use CGNAT. Try https://playit.gg as a free tunneling alternative.
 - **"Connection refused"**: Server isn't running, wrong IP, or port not forwarded.
 - **"Outdated client/server"**: Players must use Minecraft Java Edition **1.21.11**.
+- **Tunnel not working**: Make sure both the tunnel and the Minecraft server are running.
+- **VPS connection refused**: Check that the VPS firewall allows ports 2333 and 25565 TCP.
 
 ---
 
