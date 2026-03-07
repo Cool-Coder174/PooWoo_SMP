@@ -377,29 +377,45 @@ ipconfig
 ```
 Look for `IPv4 Address` (e.g., `192.168.1.100`). They connect to `192.168.1.100:25565`.
 
-### Over the Internet (Rathole Tunnel)
+### Over the Internet (GCP Tunnel)
 
-Since this server runs behind apartment Wi-Fi with no router access, we use **Rathole** to tunnel traffic through a VPS.
+This server uses a free GCP e2-micro VM as an SSH relay. The Minecraft server runs on your PC; the VM just forwards traffic.
 
 **How it works:**
 ```
-Friends --> VPS (public IP, port 25565) --> Rathole tunnel --> Your PC (localhost:25565)
+Friends --> GCP VM (34.71.32.17:25565) --> SSH tunnel --> Your PC (localhost:25565)
 ```
 
-Setup instructions are in `rathole/README-TUNNEL.md`.
+**Tell friends to connect to: `34.71.32.17`**
 
-**Quick local test** (no VPS needed):
-1. Start the server: `.\start.bat`
-2. Start the tunnel: `cd rathole && python tunnel.py --forward --listen 25566 --target 127.0.0.1:25565`
-3. Open Minecraft, connect to `localhost:25566` -- if it works, the tunnel concept is verified.
+**Starting everything:**
+
+Option A -- One click (both server + tunnel):
+```
+.\start-with-tunnel.bat
+```
+
+Option B -- Separate windows (more control):
+```
+# Terminal 1: Start Minecraft
+.\start.bat
+
+# Terminal 2: Start tunnel
+.\start-tunnel-gcp.bat
+```
+
+**GCP resources:**
+- Project: `poowoo-smp-relay`
+- VM: `poowoo-relay` (e2-micro, us-central1-a)
+- Cost: $0 (free tier)
 
 ### Troubleshooting
 
 - **Firewall**: Windows should prompt to allow Java. If blocked, go to Windows Defender Firewall > Allow an app > add `java.exe`.
-- **"Connection refused"**: Server isn't running, wrong IP, or port not forwarded.
+- **"Connection refused"**: Server isn't running, or tunnel isn't open. Both must be running.
 - **"Outdated client/server"**: Players must use Minecraft Java Edition **1.21.11**.
-- **Tunnel not working**: Make sure both the tunnel and the Minecraft server are running.
-- **VPS connection refused**: Check that the VPS firewall allows ports 2333 and 25565 TCP.
+- **Tunnel drops**: The SSH session may disconnect after idle time. Restart `start-tunnel-gcp.bat`.
+- **VM stopped**: Check with `gcloud compute instances list --project=poowoo-smp-relay`. Start with `gcloud compute instances start poowoo-relay --zone=us-central1-a`.
 
 ---
 
