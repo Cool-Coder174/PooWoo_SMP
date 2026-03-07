@@ -1,11 +1,10 @@
 # Rathole CLIENT config -- runs on your PC (next to the Minecraft server).
 # Points to wherever the relay (server.toml) is running.
 #
-# For local testing:  remote_addr = "127.0.0.1:2333"
-# For production VPS: remote_addr = "YOUR_VPS_PUBLIC_IP:2333"
+# GCP relay VM: 34.71.32.17
 
 [client]
-remote_addr = "127.0.0.1:2333"
+remote_addr = "34.71.32.17:2333"
 
 [client.services.minecraft]
 token = "PooWoo_SMP_2026_secret_token"
