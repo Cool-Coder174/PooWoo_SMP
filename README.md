@@ -1,10 +1,10 @@
 # PooWoo SMP
 
-A PaperMC 1.21.11 Minecraft server with vanilla survival and BedWars.
+A PaperMC 26.1.1 Minecraft server with vanilla survival and BedWars.
 
 ## Quick Start
 
-1. Make sure **Java 21** is installed and on your PATH.
+1. Make sure **Java 25** is installed and on your PATH.
 2. Open a terminal in this folder.
 3. Run:
 
@@ -18,7 +18,7 @@ The server will start on port **25565** with 4GB RAM allocated.
 
 | Property     | Value                          |
 |--------------|--------------------------------|
-| Software     | PaperMC 1.21.11 (build 126)   |
+| Software     | PaperMC 26.1.1 (build 29)     |
 | Default Port | 25565                          |
 | Game Mode    | Survival                       |
 | Difficulty   | Normal                         |
@@ -32,6 +32,7 @@ The server will start on port **25565** with 4GB RAM allocated.
 | Multiverse-Core | 5.5.2   | Multiple world management      |
 | BedWars         | 0.2.42.2| BedWars minigame               |
 | CoreProtect     | 23.1    | Data logging & anti-griefing   |
+| ViaVersion      | 5.9.0   | Cross-version client support   |
 
 ## Folder Structure
 

@@ -1,6 +1,6 @@
 @echo off
 title PooWoo SMP - Full Stack
-set "JAVA_HOME=C:\Program Files\Amazon Corretto\jdk21.0.10_7"
+set "JAVA_HOME=C:\Program Files\Amazon Corretto\jdk25.0.2_10"
 set "PATH=%JAVA_HOME%\bin;C:\Users\isaac\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin;%PATH%"
 
 echo =============================================
