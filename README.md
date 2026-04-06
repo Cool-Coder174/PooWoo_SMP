@@ -32,7 +32,6 @@ The server will start on port **25565** with 4GB RAM allocated.
 | Multiverse-Core | 5.5.2   | Multiple world management      |
 | BedWars         | 0.2.42.2| BedWars minigame               |
 | CoreProtect     | 23.1    | Data logging & anti-griefing   |
-| SimpleVoiceChat | 2.6.15  | Proximity voice chat           |
 
 ## Folder Structure
 
