@@ -7,11 +7,14 @@
 
 :: --- Java ---
 if not defined JAVA_HOME (
-    for /f "tokens=*" %%j in ('where java 2^>nul') do (
-        for %%p in ("%%~dpj..") do set "JAVA_HOME=%%~fp"
+    if exist "C:\Program Files\Amazon Corretto\jdk25.0.2_10\bin\java.exe" (
+        set "JAVA_HOME=C:\Program Files\Amazon Corretto\jdk25.0.2_10"
+    ) else (
+        for /f "tokens=*" %%j in ('where java 2^>nul') do (
+            for %%p in ("%%~dpj..") do set "JAVA_HOME=%%~fp"
+        )
     )
 )
-if not defined JAVA_HOME set "JAVA_HOME=C:\Program Files\Amazon Corretto\jdk25.0.2_10"
 
 :: --- Google Cloud SDK ---
 if not defined GCLOUD_SDK (
