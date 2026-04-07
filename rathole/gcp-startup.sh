@@ -8,16 +8,19 @@ apt-get update -qq && apt-get install -y -qq unzip > /dev/null 2>&1
 unzip -o rathole.zip -d /opt/rathole
 chmod +x /opt/rathole/rathole
 
-cat > /opt/rathole/server.toml << 'TOML'
+TOKEN=$(curl -sf "http://metadata.google.internal/computeMetadata/v1/instance/attributes/rathole-token" \
+  -H "Metadata-Flavor: Google") || { echo "ERROR: rathole-token metadata not set"; exit 1; }
+
+cat > /opt/rathole/server.toml << TOML
 [server]
 bind_addr = "0.0.0.0:2333"
 
 [server.services.minecraft]
-token = "REDACTED_TOKEN"
+token = "${TOKEN}"
 bind_addr = "0.0.0.0:25565"
 
 [server.services.voicechat]
-token = "REDACTED_TOKEN"
+token = "${TOKEN}"
 bind_addr = "0.0.0.0:24454"
 type = "udp"
 TOML

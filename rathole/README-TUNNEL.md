@@ -52,11 +52,11 @@ Create `server.toml`:
 bind_addr = "0.0.0.0:2333"
 
 [server.services.minecraft]
-token = "REDACTED_TOKEN"
+token = "YOUR_SECRET_TOKEN_HERE"
 bind_addr = "0.0.0.0:25565"
 ```
 
-IMPORTANT: Change the token to something unique and secret.
+IMPORTANT: Change the token to something unique and secret. The real token is stored in `rathole/.token` (gitignored).
 
 ### Step 3: Run the relay on the VPS
 
@@ -80,7 +80,7 @@ Edit `rathole/client.toml` and change `remote_addr` to your VPS IP:
 remote_addr = "YOUR_VPS_PUBLIC_IP:2333"
 
 [client.services.minecraft]
-token = "REDACTED_TOKEN"
+token = "YOUR_SECRET_TOKEN_HERE"
 local_addr = "127.0.0.1:25565"
 ```
 

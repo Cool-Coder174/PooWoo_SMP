@@ -32,5 +32,5 @@ echo   Friends: 34.71.32.17
 echo   Voice:   UDP 24454 via rathole tunnel
 echo =============================================
 echo.
-java -Xms16384M -Xmx16384M -jar server.jar --nogui
+java -Xms16384M -Xmx16384M -XX:+UseZGC -jar server.jar --nogui
 pause

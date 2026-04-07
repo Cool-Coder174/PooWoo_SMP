@@ -37,7 +37,13 @@ paper-world-defaults.yml
 wepif.yml
 version_history.json
 
-# Rathole binaries
+# Rathole binaries and secrets
 rathole/*.exe
 rathole/*.zip
 rathole/__pycache__/
+rathole/client.toml
+rathole/server.toml
+rathole/.token
+
+# Workflow history
+History/
