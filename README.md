@@ -36,6 +36,7 @@ The server will start on port **25565** with 16GB RAM allocated.
 | Geyser          | 2.9.5   | Bedrock-to-Java crossplay      |
 | Floodgate       | 2.2.5   | Bedrock auth (no Java account) |
 | Hurricane       | 2.1     | Bedrock collision fixes        |
+| SimpleVoiceChat | —       | Proximity voice chat (optional)|
 
 ### Standalone Tools
 
@@ -49,6 +50,7 @@ To convert a Java resource pack for Bedrock players: `java -jar tools/Thunder.ja
 
 ```
 PooWoo_SMP/
+  config.bat            Shared settings (Java path, GCP IP, RAM, etc.)
   server.jar            PaperMC server
   start.bat             Startup script
   backup.bat            World backup script
@@ -361,7 +363,7 @@ Key settings in `server.properties`:
 | `view-distance`            | 10            | Chunk render distance                 |
 | `spawn-protection`         | 0             | Blocks around spawn only OPs can edit |
 | `enable-command-block`     | true          | Allow command blocks                  |
-| `white-list`               | false         | Require whitelist to join             |
+| `white-list`               | true          | Require whitelist to join             |
 | `pvp`                      | true          | Player vs player combat               |
 
 To change these, edit `server.properties` and restart the server, or use in-game commands where available.

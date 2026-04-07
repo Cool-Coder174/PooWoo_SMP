@@ -1,7 +1,6 @@
 @echo off
 title PooWoo SMP - Full Stack
-set "JAVA_HOME=C:\Program Files\Amazon Corretto\jdk25.0.2_10"
-set "PATH=%JAVA_HOME%\bin;C:\Users\isaac\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin;%PATH%"
+call "%~dp0config.bat"
 
 echo =============================================
 echo   PooWoo SMP - Minecraft + GCP Tunnel
@@ -9,9 +8,8 @@ echo =============================================
 echo.
 
 echo [1/3] Opening SSH tunnel to GCP relay...
-echo       Friends connect to: 34.71.32.17
+echo       Friends connect to: %GCP_RELAY_IP%
 start "GCP Tunnel" "%~dp0start-tunnel-gcp.bat"
-:: Give SSH tunnel time to establish before starting dependent services
 timeout /t 8 /nobreak >nul
 
 echo [2/3] Starting rathole client (Bedrock UDP + Voice Chat UDP)...
@@ -30,11 +28,11 @@ echo.
 echo =============================================
 echo   CONNECTION INFO:
 echo   Local:     localhost
-echo   Friends:   34.71.32.17
+echo   Friends:   %GCP_RELAY_IP%
 echo   Java:      TCP 25565 via SSH tunnel
 echo   Bedrock:   UDP 19132 via rathole tunnel
 echo   Voice:     UDP 24454 via rathole tunnel
 echo =============================================
 echo.
-java -Xms16384M -Xmx16384M -XX:+UseZGC -jar server.jar --nogui
+java -Xms%SERVER_RAM%M -Xmx%SERVER_RAM%M -XX:+UseZGC -jar %SERVER_JAR% --nogui
 pause

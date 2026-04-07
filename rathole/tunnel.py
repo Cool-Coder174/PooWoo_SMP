@@ -68,9 +68,9 @@ async def run_forward(listen_port, target_host, target_port):
     async def on_connect(reader, writer):
         asyncio.create_task(handle_connection(reader, writer, target_host, target_port))
 
-    server = await asyncio.start_server(on_connect, "0.0.0.0", listen_port)
+    server = await asyncio.start_server(on_connect, "127.0.0.1", listen_port)
     print(f"=== PooWoo SMP Tunnel ===")
-    print(f"Listening on 0.0.0.0:{listen_port}")
+    print(f"Listening on 127.0.0.1:{listen_port}")
     print(f"Forwarding to {target_host}:{target_port}")
     print(f"")
     print(f"Connect Minecraft to: localhost:{listen_port}")

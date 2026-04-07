@@ -1,6 +1,5 @@
 @echo off
 title PooWoo SMP
-set "JAVA_HOME=C:\Program Files\Amazon Corretto\jdk25.0.2_10"
-set "PATH=%JAVA_HOME%\bin;%PATH%"
-java -Xms16384M -Xmx16384M -XX:+UseZGC -jar server.jar --nogui
+call "%~dp0config.bat"
+java -Xms%SERVER_RAM%M -Xmx%SERVER_RAM%M -XX:+UseZGC -jar %SERVER_JAR% --nogui
 pause

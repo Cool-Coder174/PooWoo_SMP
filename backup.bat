@@ -21,7 +21,7 @@ mkdir "%BACKUP_DIR%"
 echo [1/4] Backing up world...
 if exist world (
     xcopy /E /I /Q world "%BACKUP_DIR%\world" >nul
-    if errorlevel 4 (
+    if !ERRORLEVEL! GEQ 2 (
         echo       FAILED - check disk space and permissions.
         set /a ERRORS+=1
     ) else (
@@ -34,7 +34,7 @@ if exist world (
 echo [2/4] Backing up world_nether...
 if exist world_nether (
     xcopy /E /I /Q world_nether "%BACKUP_DIR%\world_nether" >nul
-    if errorlevel 4 (
+    if !ERRORLEVEL! GEQ 2 (
         echo       FAILED - check disk space and permissions.
         set /a ERRORS+=1
     ) else (
@@ -47,7 +47,7 @@ if exist world_nether (
 echo [3/4] Backing up world_the_end...
 if exist world_the_end (
     xcopy /E /I /Q world_the_end "%BACKUP_DIR%\world_the_end" >nul
-    if errorlevel 4 (
+    if !ERRORLEVEL! GEQ 2 (
         echo       FAILED - check disk space and permissions.
         set /a ERRORS+=1
     ) else (
