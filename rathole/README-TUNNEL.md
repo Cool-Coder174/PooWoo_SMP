@@ -117,8 +117,17 @@ No port needed since the relay listens on the default 25565.
 Open these ports on your VPS:
 - **2333 TCP** - rathole control channel
 - **25565 TCP** - Minecraft player connections
+- **24454 UDP** - Simple Voice Chat
 
 On most cloud providers, this is done in the web dashboard under "Security Groups" or "Firewall".
+
+For GCP, run:
+```bash
+gcloud compute firewall-rules create allow-voicechat-udp \
+  --allow=udp:24454 \
+  --direction=INGRESS \
+  --description="Simple Voice Chat UDP for PooWoo SMP"
+```
 
 ## Security
 

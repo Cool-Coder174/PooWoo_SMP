@@ -15,6 +15,11 @@ bind_addr = "0.0.0.0:2333"
 [server.services.minecraft]
 token = "REDACTED_TOKEN"
 bind_addr = "0.0.0.0:25565"
+
+[server.services.voicechat]
+token = "REDACTED_TOKEN"
+bind_addr = "0.0.0.0:24454"
+type = "udp"
 TOML
 
 cat > /etc/systemd/system/rathole.service << 'SERVICE'
