@@ -6,13 +6,12 @@
 :: a script (e.g. set "JAVA_HOME=D:\jdk21" && start.bat).
 
 :: --- Java ---
-if not defined JAVA_HOME (
-    if exist "C:\Program Files\Amazon Corretto\jdk25.0.2_10\bin\java.exe" (
-        set "JAVA_HOME=C:\Program Files\Amazon Corretto\jdk25.0.2_10"
-    ) else (
-        for /f "tokens=*" %%j in ('where java 2^>nul') do (
-            for %%p in ("%%~dpj..") do set "JAVA_HOME=%%~fp"
-        )
+:: Prefer Java 25 (required by Paper 1.21+), fall back to JAVA_HOME / PATH
+if exist "C:\Program Files\Amazon Corretto\jdk25.0.2_10\bin\java.exe" (
+    set "JAVA_HOME=C:\Program Files\Amazon Corretto\jdk25.0.2_10"
+) else if not defined JAVA_HOME (
+    for /f "tokens=*" %%j in ('where java 2^>nul') do (
+        for %%p in ("%%~dpj..") do set "JAVA_HOME=%%~fp"
     )
 )
 
