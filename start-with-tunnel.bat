@@ -10,7 +10,9 @@ echo.
 echo [1/3] Opening SSH tunnel to GCP relay...
 echo       Friends connect to: %GCP_RELAY_IP%
 start "GCP Tunnel" "%~dp0start-tunnel-gcp.bat"
-timeout /t 8 /nobreak >nul
+echo       Waiting %TUNNEL_WAIT%s for SSH tunnel to establish...
+timeout /t %TUNNEL_WAIT% /nobreak >nul
+echo       (If tunnel isn't ready yet, friends may need to retry connecting)
 
 echo [2/3] Starting rathole client (Bedrock UDP + Voice Chat UDP)...
 if exist "%~dp0rathole\rathole.exe" (
@@ -34,5 +36,5 @@ echo   Bedrock:   UDP 19132 via rathole tunnel
 echo   Voice:     UDP 24454 via rathole tunnel
 echo =============================================
 echo.
-java -Xms%SERVER_RAM%M -Xmx%SERVER_RAM%M -XX:+UseZGC -jar %SERVER_JAR% --nogui
+%JAVA_CMD%
 pause

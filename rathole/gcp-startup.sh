@@ -11,15 +11,18 @@ cd /opt
 wget -q "$RATHOLE_URL" -O rathole.zip
 apt-get update -qq && apt-get install -y -qq unzip > /dev/null 2>&1
 
-if [ -n "$RATHOLE_SHA256" ]; then
-    echo "${RATHOLE_SHA256}  rathole.zip" | sha256sum -c - || { echo "ERROR: checksum mismatch — download may be compromised"; exit 1; }
-else
-    echo "WARNING: No SHA-256 hash configured — skipping integrity check"
-    echo "         Hash of downloaded file: $(sha256sum rathole.zip | cut -d' ' -f1)"
-    echo "         Pin this hash in RATHOLE_SHA256 to enable verification"
+if [ -z "$RATHOLE_SHA256" ]; then
+    echo "ERROR: RATHOLE_SHA256 is not set — refusing to run an unverified binary"
+    echo "       Downloaded file hash: $(sha256sum rathole.zip | cut -d' ' -f1)"
+    echo "       Verify this hash, then set RATHOLE_SHA256 in this script"
+    exit 1
 fi
 
+echo "${RATHOLE_SHA256}  rathole.zip" | sha256sum -c - \
+    || { echo "ERROR: checksum mismatch — download may be compromised"; exit 1; }
+
 unzip -o rathole.zip -d /opt/rathole
+rm -f rathole.zip
 chmod +x /opt/rathole/rathole
 
 TOKEN=$(curl -sf "http://metadata.google.internal/computeMetadata/v1/instance/attributes/rathole-token" \

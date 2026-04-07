@@ -448,7 +448,7 @@ Voice   --> GCP VM (34.71.32.17:24454) --> rathole tunnel (UDP) --> Your PC (loc
 
 **Tell friends to connect to: `34.71.32.17`** (port 25565 for Java, 19132 for Bedrock)
 
-> **Security note:** This IP is published in a public GitHub repo. The whitelist is currently **off** (`white-list=false`). Enable it in `server.properties` and add players with `/whitelist add <name>` if you experience unwanted joins.
+> **Security note:** This IP is published in a public GitHub repo. The whitelist is **on** (`white-list=true` in `server.properties`). Manage it with `/whitelist add <name>` and `/whitelist remove <name>`.
 
 > **Important:** Bedrock uses UDP, not TCP. SSH tunnels are TCP-only, so Bedrock traffic goes through rathole instead. The `start-with-tunnel.bat` script launches both the SSH tunnel (Java) and rathole client (Bedrock + Voice Chat) automatically.
 
