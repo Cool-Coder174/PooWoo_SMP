@@ -3,8 +3,12 @@
 ## Architecture
 
 ```
-Friends (Internet) --> [VPS:25565] rathole relay --> [Your PC] rathole agent --> Minecraft:25565
+Java    (TCP) --> GCP VM:25565 --> SSH tunnel    --> Your PC:25565  (Minecraft server)
+Bedrock (UDP) --> GCP VM:19132 --> rathole relay --> Your PC:19132  (Geyser)
+Voice   (UDP) --> GCP VM:24454 --> rathole relay --> Your PC:24454  (SimpleVoiceChat)
 ```
+
+Java traffic uses an SSH tunnel (TCP only). Rathole handles Bedrock and Voice Chat because they use UDP.
 
 ## Local Testing (No VPS Needed)
 
@@ -51,9 +55,15 @@ Create `server.toml`:
 [server]
 bind_addr = "0.0.0.0:2333"
 
-[server.services.minecraft]
+[server.services.bedrock]
 token = "YOUR_SECRET_TOKEN_HERE"
-bind_addr = "0.0.0.0:25565"
+bind_addr = "0.0.0.0:19132"
+type = "udp"
+
+[server.services.voicechat]
+token = "YOUR_SECRET_TOKEN_HERE"
+bind_addr = "0.0.0.0:24454"
+type = "udp"
 ```
 
 IMPORTANT: Change the token to something unique and secret. The real token is stored in `rathole/.token` (gitignored).
@@ -79,9 +89,15 @@ Edit `rathole/client.toml` and change `remote_addr` to your VPS IP:
 [client]
 remote_addr = "YOUR_VPS_PUBLIC_IP:2333"
 
-[client.services.minecraft]
+[client.services.bedrock]
 token = "YOUR_SECRET_TOKEN_HERE"
-local_addr = "127.0.0.1:25565"
+local_addr = "127.0.0.1:19132"
+type = "udp"
+
+[client.services.voicechat]
+token = "YOUR_SECRET_TOKEN_HERE"
+local_addr = "127.0.0.1:24454"
+type = "udp"
 ```
 
 Tokens MUST match between server.toml and client.toml.
@@ -116,8 +132,9 @@ No port needed since the relay listens on the default 25565.
 
 Open these ports on your VPS:
 - **2333 TCP** - rathole control channel
-- **25565 TCP** - Minecraft player connections
-- **24454 UDP** - Simple Voice Chat
+- **25565 TCP** - Minecraft Java (via SSH tunnel, not rathole)
+- **19132 UDP** - Minecraft Bedrock (via rathole)
+- **24454 UDP** - Simple Voice Chat (via rathole)
 
 On most cloud providers, this is done in the web dashboard under "Security Groups" or "Firewall".
 

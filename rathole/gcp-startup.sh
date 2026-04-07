@@ -15,9 +15,10 @@ cat > /opt/rathole/server.toml << TOML
 [server]
 bind_addr = "0.0.0.0:2333"
 
-[server.services.minecraft]
+[server.services.bedrock]
 token = "${TOKEN}"
-bind_addr = "0.0.0.0:25565"
+bind_addr = "0.0.0.0:19132"
+type = "udp"
 
 [server.services.voicechat]
 token = "${TOKEN}"

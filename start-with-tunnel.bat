@@ -11,14 +11,16 @@ echo.
 echo [1/3] Opening SSH tunnel to GCP relay...
 echo       Friends connect to: 34.71.32.17
 start "GCP Tunnel" "%~dp0start-tunnel-gcp.bat"
+:: Give SSH tunnel time to establish before starting dependent services
 timeout /t 8 /nobreak >nul
 
-echo [2/3] Starting rathole client for Voice Chat (UDP)...
+echo [2/3] Starting rathole client (Bedrock UDP + Voice Chat UDP)...
 if exist "%~dp0rathole\rathole.exe" (
-    start "Voice Chat Tunnel" /min "%~dp0rathole\rathole.exe" "%~dp0rathole\client.toml"
+    start "Rathole Tunnel" /min "%~dp0rathole\rathole.exe" "%~dp0rathole\client.toml"
+    echo       Bedrock UDP tunnel started on port 19132
     echo       Voice Chat UDP tunnel started on port 24454
 ) else (
-    echo       [!] rathole.exe not found - Voice Chat tunnel skipped
+    echo       [!] rathole.exe not found - UDP tunnels skipped
     echo       Download rathole and place rathole.exe in the rathole folder
 )
 timeout /t 2 /nobreak >nul
@@ -27,9 +29,11 @@ echo [3/3] Starting Minecraft server on port 25565...
 echo.
 echo =============================================
 echo   CONNECTION INFO:
-echo   Local:   localhost
-echo   Friends: 34.71.32.17
-echo   Voice:   UDP 24454 via rathole tunnel
+echo   Local:     localhost
+echo   Friends:   34.71.32.17
+echo   Java:      TCP 25565 via SSH tunnel
+echo   Bedrock:   UDP 19132 via rathole tunnel
+echo   Voice:     UDP 24454 via rathole tunnel
 echo =============================================
 echo.
 java -Xms16384M -Xmx16384M -XX:+UseZGC -jar server.jar --nogui
