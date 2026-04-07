@@ -37,4 +37,10 @@ echo   Voice:     UDP 24454 via rathole tunnel
 echo =============================================
 echo.
 %JAVA_CMD%
+
+echo.
+echo Server stopped. Cleaning up tunnel processes...
+taskkill /FI "WINDOWTITLE eq GCP Tunnel*" /F >nul 2>&1
+taskkill /FI "WINDOWTITLE eq Rathole Tunnel*" /F >nul 2>&1
+echo Done.
 pause

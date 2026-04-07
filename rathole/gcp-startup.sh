@@ -4,7 +4,7 @@ set -e
 RATHOLE_VERSION="0.5.0"
 RATHOLE_URL="https://github.com/rathole-org/rathole/releases/download/v${RATHOLE_VERSION}/rathole-x86_64-unknown-linux-gnu.zip"
 # To obtain: download the zip on a trusted machine, run sha256sum, and paste here.
-RATHOLE_SHA256=""
+RATHOLE_SHA256="3e7d0d0f365120cd3cd351d147d1a12ee960c8068b464d4dd533a3821873b80e"
 
 cd /opt
 

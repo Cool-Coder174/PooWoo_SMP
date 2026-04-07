@@ -5,14 +5,20 @@ A PaperMC 26.1.1 Minecraft server with vanilla survival and BedWars.
 ## Quick Start
 
 1. Make sure **Java 25** is installed and on your PATH.
-2. Open a terminal in this folder.
-3. Run:
+2. Copy the server properties template:
+   ```
+   copy server.properties.example server.properties
+   ```
+3. Open a terminal in this folder.
+4. Run:
 
 ```
 .\start.bat
 ```
 
 The server will start on port **25565** with 16GB RAM allocated.
+
+> **Note:** `server.properties` is gitignored (Minecraft rewrites it on every startup). Edit `server.properties.example` when you want to commit config changes, then copy it to `server.properties`.
 
 ## Server Info
 
@@ -55,8 +61,9 @@ PooWoo_SMP/
   start.bat             Startup script
   backup.bat            World backup script
   eula.txt              EULA acceptance
-  server.properties     Server configuration
-  plugins/              Plugin jars + Geyser extensions
+  server.properties.example  Server config template (tracked in git)
+  server.properties          Server config (generated from .example, gitignored)
+  plugins/                   Plugin jars + Geyser extensions
   tools/                Standalone tools (Thunder, etc.)
   world/                Main survival world (generated on first boot)
   world_nether/         Nether dimension (generated)
@@ -349,7 +356,7 @@ Full documentation: https://docs.screamingsandals.org/BedWars/latest/
 
 ## Server Configuration Reference
 
-Key settings in `server.properties`:
+Key settings in `server.properties` (edit `server.properties.example` to commit changes):
 
 | Setting                    | Current Value | What It Does                          |
 |----------------------------|---------------|---------------------------------------|
@@ -364,9 +371,10 @@ Key settings in `server.properties`:
 | `spawn-protection`         | 0             | Blocks around spawn only OPs can edit |
 | `enable-command-block`     | true          | Allow command blocks                  |
 | `white-list`               | true          | Require whitelist to join             |
+| `enforce-whitelist`        | true          | Kick players immediately on whitelist removal |
 | `pvp`                      | true          | Player vs player combat               |
 
-To change these, edit `server.properties` and restart the server, or use in-game commands where available.
+To change these, edit `server.properties.example`, copy to `server.properties`, and restart the server.
 
 ---
 

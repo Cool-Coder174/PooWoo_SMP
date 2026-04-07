@@ -20,6 +20,7 @@ bundler/
 plugins/*/
 
 # Runtime / operational
+server.properties
 .console_history
 crash-reports/
 banned-ips.json

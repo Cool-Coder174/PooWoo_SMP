@@ -5,10 +5,27 @@
 :: Override any value by setting the environment variable before running
 :: a script (e.g. set "JAVA_HOME=D:\jdk21" && start.bat).
 
-if not defined JAVA_HOME  set "JAVA_HOME=C:\Program Files\Amazon Corretto\jdk25.0.2_10"
-if not defined GCLOUD_SDK set "GCLOUD_SDK=C:\Users\isaac\AppData\Local\Google\Cloud SDK\google-cloud-sdk"
+:: --- Java ---
+if not defined JAVA_HOME (
+    for /f "tokens=*" %%j in ('where java 2^>nul') do (
+        for %%p in ("%%~dpj..") do set "JAVA_HOME=%%~fp"
+    )
+)
+if not defined JAVA_HOME set "JAVA_HOME=C:\Program Files\Amazon Corretto\jdk25.0.2_10"
 
-set "PATH=%JAVA_HOME%\bin;%GCLOUD_SDK%\bin;%PATH%"
+:: --- Google Cloud SDK ---
+if not defined GCLOUD_SDK (
+    if exist "%LOCALAPPDATA%\Google\Cloud SDK\google-cloud-sdk" (
+        set "GCLOUD_SDK=%LOCALAPPDATA%\Google\Cloud SDK\google-cloud-sdk"
+    ) else if exist "%ProgramFiles%\Google\Cloud SDK\google-cloud-sdk" (
+        set "GCLOUD_SDK=%ProgramFiles%\Google\Cloud SDK\google-cloud-sdk"
+    ) else if exist "%ProgramFiles(x86)%\Google\Cloud SDK\google-cloud-sdk" (
+        set "GCLOUD_SDK=%ProgramFiles(x86)%\Google\Cloud SDK\google-cloud-sdk"
+    )
+)
+
+set "PATH=%JAVA_HOME%\bin;%PATH%"
+if defined GCLOUD_SDK set "PATH=%GCLOUD_SDK%\bin;%PATH%"
 
 if not exist "%JAVA_HOME%\bin\java.exe" (
     echo [!] WARNING: java.exe not found at %JAVA_HOME%\bin\java.exe
